@@ -1,0 +1,35 @@
+
+<h1>Welcome to TicTacToe!</h1>
+<h2>It is player <%= @current_player %>'s turn!</h2>
+<p>Enter your selection using the form below</p>
+
+<p>Enter your seleciton with the form below</p>
+
+<pre>
+  <table>
+    <% 3.times do |row| %>
+      <tr>
+        <% 3.times do |cell| %>
+      
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</pre>
+
+
+
+<%= form_tag(make_move_path, :method => "POST") do %>
+  <table>
+    <% 3.times do |row| %>
+      <tr> 
+        <% 3.times do |cell| %>
+          <td>
+            <%= radio_button_tag("move","#") %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <%= submit_tag "Make Move" %>
+<% end %>
