@@ -2,7 +2,8 @@ class TicTacToeController < ApplicationController
 
   def new
     @current_player = 'X'
-    @board_arr = Board.new
+    @board = Board.new
+    @board_arr = @board.board_arr
 
     save_player
     render :game_board
@@ -10,8 +11,11 @@ class TicTacToeController < ApplicationController
 
   def make_move
     @current_player = retrieve_current_player
-    @board_arr = retrieve_board_arr
 
+    @board = Board.new(retrieve_board_arr)
+    @board.add_piece(retrieve_coords, @current_player)
+
+    @board_arr = @board.board_arr
     switch_player
     save_player
     save_board_arr
@@ -44,5 +48,9 @@ class TicTacToeController < ApplicationController
   def retrieve_board_arr
     session[:saved_board_arr]
   end
+
+  def retrieve_coords
+    params[:move].split(",").map(&:to_i)
+  end  
 
 end

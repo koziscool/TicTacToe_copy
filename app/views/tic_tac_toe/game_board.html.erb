@@ -7,10 +7,12 @@
 
 <pre>
   <table>
-    <% 3.times do |row| %>
+    <% @board_arr.each do |row| %>
       <tr>
-        <% 3.times do |cell| %>
-      
+        <% row.each do |cell| %>
+          <td>
+            <%= cell.nil? ? '-' : cell %>
+          </td>
         <% end %>
       </tr>
     <% end %>
@@ -25,7 +27,7 @@
       <tr> 
         <% 3.times do |cell| %>
           <td>
-            <%= radio_button_tag("move","#") %>
+            <%= radio_button_tag("move","#{row},#{cell}") %>
           </td>
         <% end %>
       </tr>

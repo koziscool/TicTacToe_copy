@@ -11,5 +11,10 @@ class Board
   def self.blank_board
     Array.new(3){Array.new(3)}
   end
+
+  def add_piece(coords, piece)
+    @board_arr[coords[0]][coords[1]] = piece
+  end
+  
 end
 
