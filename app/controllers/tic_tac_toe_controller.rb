@@ -6,6 +6,7 @@ class TicTacToeController < ApplicationController
     @board_arr = @board.board_arr
 
     save_player
+    save_board_arr
     render :game_board
   end
 
@@ -15,6 +16,12 @@ class TicTacToeController < ApplicationController
     @board = Board.new(retrieve_board_arr)
     @board.add_piece(retrieve_coords, @current_player)
 
+    if @board.winning_combination?(@current_player)
+      @game_over = "Game over, player #{@current_player} WINS!"
+    elsif @board.full?
+      @game_over = "Game Over! You've drawn."
+    end
+
     @board_arr = @board.board_arr
     switch_player
     save_player
@@ -23,8 +30,8 @@ class TicTacToeController < ApplicationController
     render :game_board
   end
 
-  private
 
+  private
   # switch the current player
   def switch_player
     @current_player = (@current_player == 'X' ? 'O' : 'X')
